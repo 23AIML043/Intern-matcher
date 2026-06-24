@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 function Register() {
   const navigate = useNavigate();
+  const { userData, setUserData } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,6 +21,11 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUserData({
+      ...userData,
+      name: formData.name,
+      email: formData.email,
+    });
 
     console.log(formData);
 
